@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Seymour One', sans-serif;
+}
+
+.input-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(185, 214, 135);
+    padding: 10px 0;
+    margin-bottom: 15px;
+    
+}
+
+input {
+    position: relative;
+    width: 300px;
+    height: 10px;
+    padding: 10px;
+    border-color: darkgray;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.search-button {
+    background-color: transparent;
+    position: absolute;
+    background-image: url("https://img.freepik.com/premium-vector/search-icon-magnifying-glass-symbol-outline-icon_543062-139.jpg");
+      background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+    color: black;
+    background-size: cover;
+    top: 3%;
+    right: 40%;
+    background-color: darkgrey;
+}
+
+.gallery {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    justify-content: center;
+}
+
+
+
+.info {
+    width: 360px;
+    display: flex;
+    gap: 15px;
+    
+}
+
+.info-item {
+    display: inline-block;
+    margin-bottom: 0;
+    text-decoration: none;
+    text-align: center;
+    font-size: small;
+    color: rgb(88, 87, 87);
+    text-decoration: none;
+}
+
+.load-more {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+    height: 30px;
+    border-radius: 15px;
+    border-color: dimgray;
+    background-color: rgb(185, 214, 135);
+    color: darkolivegreen;
+}
+
+.hidden {
+    display: none;
+}

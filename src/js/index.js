@@ -43,7 +43,7 @@ function markupGallery(images) {
     return `
     <div class="photo-card">
   <a class="gallery-link" href="${largeImageURL}">
-  <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+  <img src="${webformatURL}" alt="${tags}" loading="lazy" width = "360" height = "300" />
   <div class="info">
     <p class="info-item">
       <b>Likes ${likes}</b>
