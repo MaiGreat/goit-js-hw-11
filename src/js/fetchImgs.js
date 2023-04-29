@@ -7,7 +7,7 @@ const URL = 'https://pixabay.com/api/';
 
 
 
-const fetchGalleryImgs = async (userRequest) => {
+const fetchGalleryImgs = async (userRequest, page) => {
 console.log(userRequest);
     const response = await axios.get(URL, {
         params: {
@@ -16,14 +16,10 @@ console.log(userRequest);
             image_type: 'photo',
             orientation: 'horizontal',
             safesearch: true,
-            page: '1',
+            page: page,
             per_page: '40'
         }
     });
     return response.data;
 };
 
-fetchGalleryImgs().then(galleryImgs => {
-    console.log(galleryImgs)
-    
-});

@@ -9,25 +9,37 @@ const btnLoadMore = document.querySelector('.load-more');
 formEl.addEventListener('submit', onSubmit);
 btnLoadMore.addEventListener('click', onClick)
 
+let page = 1;
+let inputTextToSearch = '';
 
 function onSubmit(e) {
   e.preventDefault();
-  const inputTextToSearch = e.currentTarget.elements.searchQuery.value.trim();
+  inputTextToSearch = e.currentTarget.elements.searchQuery.value.trim();
   console.log(inputTextToSearch);
-  fetchGalleryImgs(inputTextToSearch).then(arrayDate => {
+  if (inputTextToSearch === '') {
+    return;
+  }
+  page = 1;
+  fetchGalleryImgs(inputTextToSearch, page).then(arrayDate => {
     console.log(arrayDate);
     divEl.innerHTML = '';
-    markupGallery(arrayDate.hits);
     if (arrayDate.hits.length === 0) {
-      Notiflix.Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+      throw Error('Sorry, there are no images matching your search query. Please try again.');
     }
+    markupGallery(arrayDate.hits);
   })
-  
+    .catch(error => {
+      Notiflix.Notify.failure(error.message);
+    });
 }
 
-function onClick(e) {
-  
 
+function onClick(e) {
+  page += 1;
+  fetchGalleryImgs(inputTextToSearch, page).then(arrayDate => {
+    console.log(arrayDate);
+    markupGallery(arrayDate.hits);
+  })
 }
 
 function markupGallery(images) {
@@ -43,7 +55,7 @@ function markupGallery(images) {
     return `
     <div class="photo-card">
   <a class="gallery-link" href="${largeImageURL}">
-  <img src="${webformatURL}" alt="${tags}" loading="lazy" width = "360" height = "300" />
+  <img src="${webformatURL}" alt="${tags}" loading="lazy" width = "300" height = "200" />
   <div class="info">
     <p class="info-item">
       <b>Likes ${likes}</b>

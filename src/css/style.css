@@ -7,6 +7,9 @@ body {
     font-family: 'Seymour One', sans-serif;
 }
 
+a {
+    text-decoration: none;
+}
 .input-form {
     display: flex;
     align-items: center;
@@ -31,7 +34,7 @@ input {
     background-color: transparent;
     position: absolute;
     background-image: url("https://img.freepik.com/premium-vector/search-icon-magnifying-glass-symbol-outline-icon_543062-139.jpg");
-      background-repeat: no-repeat;
+    background-repeat: no-repeat;
     background-position: center;
     border: none;
     cursor: pointer;
@@ -46,16 +49,19 @@ input {
 
 .gallery {
     display: flex;
-    gap: 10px;
+    gap: 30px;
     flex-wrap: wrap;
-    column-gap: 24px;
     justify-content: center;
 }
 
 
+.photo-card {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
 
 .info {
-    width: 360px;
+    width: 300px;
     display: flex;
     gap: 15px;
     
@@ -68,7 +74,7 @@ input {
     text-align: center;
     font-size: small;
     color: rgb(88, 87, 87);
-    text-decoration: none;
+    
 }
 
 .load-more {
@@ -80,8 +86,9 @@ input {
     border-color: dimgray;
     background-color: rgb(185, 214, 135);
     color: darkolivegreen;
+    margin: 20px;
 }
 
-.hidden {
+/* .hidden {
     display: none;
-}
+} */
