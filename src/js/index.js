@@ -1,23 +1,23 @@
-import { fetchGalleryImgs } from './fetchImgs'
+import { fetchGalleryImgs } from './fetchImgs.js'
 import Notiflix from 'notiflix';
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 const formEl = document.querySelector('#search-form');
 const divEl = document.querySelector('.gallery');
 const btnLoadMore = document.querySelector('.load-more');
-// console.log(btnLoadMore);
+
 
 formEl.addEventListener('submit', onSubmit);
 btnLoadMore.addEventListener('click', onClick)
 
 let page = 1;
 let inputTextToSearch = '';
+const simpleLightBox = new SimpleLightbox('.gallery a');
 
 function onSubmit(e) {
   e.preventDefault();
   inputTextToSearch = e.currentTarget.elements.searchQuery.value.trim();
-   btnLoadMore.setAttribute('hidden', true);
-  // changeButtonsAttribute();
-  console.log(inputTextToSearch);
   if (inputTextToSearch === '') {
     return;
   }
@@ -28,8 +28,11 @@ function onSubmit(e) {
     if (arrayDate.hits.length === 0) {
       throw Error('Sorry, there are no images matching your search query. Please try again.');
     }
+    Notiflix.Notify.success(`Hooray! We found ${arrayDate.totalHits} images.`)
     markupGallery(arrayDate.hits);
-    // changeButtonsAttribute();
+    showBtn();
+    simpleLightBox.refresh();
+    hideBtnIfNeed(arrayDate);
   })
     .catch(error => {
       Notiflix.Notify.failure(error.message);
@@ -40,14 +43,26 @@ function onSubmit(e) {
 function onClick(e) {
   page += 1;
   fetchGalleryImgs(inputTextToSearch, page).then(arrayDate => {
-    console.log(arrayDate);
     markupGallery(arrayDate.hits);
+    simpleLightBox.refresh();
+    hideBtnIfNeed(arrayDate);
   })
 }
 
-// function changeButtonsAttribute() {
-//     btnLoadMore.toggleAttribute('hidden');
-// }
+function showBtn() {
+  btnLoadMore.classList.remove('is-hidden');
+}
+
+function hiddenBtn() {
+  btnLoadMore.classList.add('is-hidden');
+}
+
+function hideBtnIfNeed(arrayDate) {
+      if (arrayDate.totalHits === divEl.children.length) {
+        hiddenBtn();
+         Notiflix.Notify.info("We're sorry, but you've reached the end of search results.")
+    }
+}
 
 function markupGallery(images) {
   const markup = images.map(({
@@ -60,23 +75,24 @@ function markupGallery(images) {
     downloads,
   }) => {
     return `
-    <div class="photo-card">
+<div class="photo-card">
   <a class="gallery-link" href="${largeImageURL}">
-  <img src="${webformatURL}" alt="${tags}" loading="lazy" width = "300" height = "200" />
-  <div class="info">
-    <p class="info-item">
-      <b>Likes ${likes}</b>
-    </p>
-    <p class="info-item">
-      <b>Views ${views}</b>
-    </p>
-    <p class="info-item">
-      <b>Comments ${comments}</b>
-    </p>
-    <p class="info-item">
-      <b>Downloads ${downloads}</b>
-    </p>
-  </div>
+    <img src="${webformatURL}" alt="${tags}" loading="lazy" width = "300" height = "200" />
+    <div class="info">
+      <p class="info-item">
+        <b>Likes ${likes}</b>
+      </p>
+      <p class="info-item">
+        <b>Views ${views}</b>
+      </p>
+      <p class="info-item">
+        <b>Comments ${comments}</b>
+      </p>
+      <p class="info-item">
+        <b>Downloads ${downloads}</b>
+      </p>
+    </div>
+  </a>
 </div>
   `
   })

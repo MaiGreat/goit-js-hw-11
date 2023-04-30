@@ -17,7 +17,6 @@ a {
     background-color: rgb(185, 214, 135);
     padding: 10px 0;
     margin-bottom: 15px;
-    
 }
 
 input {
@@ -42,7 +41,7 @@ input {
     width: 25px;
     color: black;
     background-size: cover;
-    top: 2%;
+    top: 3%;
     right: 40%;
     background-color: darkgrey;
 }
@@ -64,12 +63,12 @@ input {
     width: 300px;
     display: flex;
     gap: 15px;
-    
+    padding: 10px 0;
 }
 
 .info-item {
     display: inline-block;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
     text-decoration: none;
     text-align: center;
     font-size: small;
@@ -88,6 +87,6 @@ input {
     color: darkolivegreen;
 }
 
-.hidden {
+.is-hidden {
     display: none;
 }
