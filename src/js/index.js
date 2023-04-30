@@ -23,7 +23,7 @@ function onSubmit(e) {
   }
   page = 1;
   fetchGalleryImgs(inputTextToSearch, page).then(arrayDate => {
-    console.log(arrayDate);
+    // console.log(arrayDate);
     divEl.innerHTML = '';
     if (arrayDate.hits.length === 0) {
       throw Error('Sorry, there are no images matching your search query. Please try again.');
