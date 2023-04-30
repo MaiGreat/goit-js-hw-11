@@ -15,6 +15,8 @@ let inputTextToSearch = '';
 function onSubmit(e) {
   e.preventDefault();
   inputTextToSearch = e.currentTarget.elements.searchQuery.value.trim();
+   btnLoadMore.setAttribute('hidden', true);
+  // changeButtonsAttribute();
   console.log(inputTextToSearch);
   if (inputTextToSearch === '') {
     return;
@@ -27,6 +29,7 @@ function onSubmit(e) {
       throw Error('Sorry, there are no images matching your search query. Please try again.');
     }
     markupGallery(arrayDate.hits);
+    // changeButtonsAttribute();
   })
     .catch(error => {
       Notiflix.Notify.failure(error.message);
@@ -41,6 +44,10 @@ function onClick(e) {
     markupGallery(arrayDate.hits);
   })
 }
+
+// function changeButtonsAttribute() {
+//     btnLoadMore.toggleAttribute('hidden');
+// }
 
 function markupGallery(images) {
   const markup = images.map(({

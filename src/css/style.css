@@ -42,7 +42,7 @@ input {
     width: 25px;
     color: black;
     background-size: cover;
-    top: 3%;
+    top: 2%;
     right: 40%;
     background-color: darkgrey;
 }
@@ -79,16 +79,15 @@ input {
 
 .load-more {
     display: block;
-    margin: 0 auto;
+    margin: 20px auto;
     width: 80px;
     height: 30px;
     border-radius: 15px;
     border-color: dimgray;
     background-color: rgb(185, 214, 135);
     color: darkolivegreen;
-    margin: 20px;
 }
 
-/* .hidden {
+.hidden {
     display: none;
-} */
+}
