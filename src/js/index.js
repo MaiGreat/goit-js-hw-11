@@ -1,7 +1,10 @@
-import { fetchGalleryImgs } from './fetchImgs.js'
+import { FetchGalleryClass } from './fetchGalleryClass.js';
 import Notiflix from 'notiflix';
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+
+const fetchGalleryExamp = new FetchGalleryClass();
+
 
 const formEl = document.querySelector('#search-form');
 const divEl = document.querySelector('.gallery');
@@ -11,18 +14,16 @@ const btnLoadMore = document.querySelector('.load-more');
 formEl.addEventListener('submit', onSubmit);
 btnLoadMore.addEventListener('click', onClick)
 
-let page = 1;
-let inputTextToSearch = '';
 const simpleLightBox = new SimpleLightbox('.gallery a');
 
 function onSubmit(e) {
   e.preventDefault();
-  inputTextToSearch = e.currentTarget.elements.searchQuery.value.trim();
-  if (inputTextToSearch === '') {
+  fetchGalleryExamp.propertyUserRequest  = e.currentTarget.elements.searchQuery.value.trim();
+  if (fetchGalleryExamp.propertyUserRequest  === '') {
     return;
   }
-  page = 1;
-  fetchGalleryImgs(inputTextToSearch, page).then(arrayDate => {
+  fetchGalleryExamp.propertyPage = 1;
+  fetchGalleryExamp.fetchGalleryImgs().then(arrayDate => {
     // console.log(arrayDate);
     divEl.innerHTML = '';
     if (arrayDate.hits.length === 0) {
@@ -41,8 +42,8 @@ function onSubmit(e) {
 
 
 function onClick(e) {
-  page += 1;
-  fetchGalleryImgs(inputTextToSearch, page).then(arrayDate => {
+  fetchGalleryExamp.propertyPage += 1;
+  fetchGalleryExamp.fetchGalleryImgs().then(arrayDate => {
     markupGallery(arrayDate.hits);
     simpleLightBox.refresh();
     hideBtnIfNeed(arrayDate);
